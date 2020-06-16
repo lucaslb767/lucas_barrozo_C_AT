@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Biblioteca.Pessoa
 {
-    class Pessoa
+    public class Pessoa
     {
         [Key]
         public int Id { get; set; }
@@ -17,12 +17,12 @@ namespace Biblioteca.Pessoa
         {
         }
 
-        public Pessoa(int id, String Nome, String Sobrenome, DateTime data)
+        public Pessoa(int id, String Nome, String Sobrenome, DateTime aniversario)
         {
             Id = id;
             nome = Nome;
             sobreNome = Sobrenome;
-            birth = data;
+            birth = aniversario;
         }
 
         public Pessoa(String Nome, String Sobrenome, DateTime data)
@@ -32,7 +32,7 @@ namespace Biblioteca.Pessoa
             birth = data;
         }
 
-        public int QntosDiasFaltam()
+        public int diasAteAniversario()
         {
             DateTime today = DateTime.Today;
             DateTime niver = new DateTime(today.Year, birth.Month, birth.Day);
@@ -42,14 +42,14 @@ namespace Biblioteca.Pessoa
                 niver = niver.AddYears(1);
             }
 
-            int diasFaltantes = (niver - today).Days;
-            return diasFaltantes;
+            int faltam = (niver - today).Days;
+            return faltam;
         }
         public override string ToString()
         {
             return " Nome Completo: " + nome + sobreNome +
                    "\n Data do Aniversario: " + birth.Day + "/" + birth.Month + "/" + birth.Year
-                   + "\n Faltam " + QntosDiasFaltam() + " dias para esse aniversario";
+                   + "\n Faltam " + diasAteAniversario() + " dias para esse aniversario";
         }
     }
 }
