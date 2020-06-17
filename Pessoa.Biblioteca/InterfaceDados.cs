@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Pessoa.Biblioteca
+namespace P.Biblioteca
 {
     public interface InterfaceDados
     {

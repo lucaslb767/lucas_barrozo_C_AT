@@ -1,4 +1,4 @@
-﻿using Pessoa.Biblioteca;
+﻿using P.Biblioteca;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,12 +6,104 @@ using System.Text;
 
 namespace lucas_barrozo_C_AT
 {
-    public class Telas
+    
+    public static class Telas
     {
+        public static Dados Dados = new Dados();
         public static void Menu()
         {
             Console.Clear();
-            Console.WriteLine("Pessoas que fazem aniversário hoje:\n");
+            Console.WriteLine("Quem faz aniversário hoje:\n");
+            
+            AniversarianteDoDia();
+            Console.WriteLine("-------------------------------------------");
+            Console.WriteLine("Escolha uma das opcoes abaixo: ");
+            Console.WriteLine("1 - Pesquisar Pessoa ");
+            Console.WriteLine("2 - Adicionar Pessoas ");
+            Console.WriteLine("3 - Editar Pessoa ");
+            Console.WriteLine("4 - Deletar ");
+            Console.WriteLine("5 - Sair ");
+            int opcao = int.Parse(Console.ReadLine());
+
+            switch (opcao)
+            {
+                case 1:
+                    BuscaPessoa();
+                    break;
+                case 2:
+                    //CadastrarPessoa();
+                    break;
+                case 3:
+                    //EditarPessoa();
+                    break;
+                case 4:
+                    //Deletar();
+                    break;
+                case 5:
+                    Console.WriteLine("Saindo do programa");
+                    break;
+                default:
+                    Console.WriteLine("escolha uma das opcoes");
+                    break;
+            }
+        }
+
+       private static void AniversarianteDoDia()
+        {
+            DateTime hoje = DateTime.Today;
+            var aniversarioHoje = Dados.BuscarPessoas(hoje);
+            if (aniversarioHoje.Count() == 0)
+            {
+                Console.WriteLine("Nenhum aniversario hoje.");
+            } else
+            {
+                foreach (var pessoa in aniversarioHoje)
+                {
+                    Console.WriteLine(pessoa.Id + " - " + pessoa.nome + " " + pessoa.sobreNome);
+                }
+            }
+        }
+
+        private static void BuscaPessoa()
+        {
+            Console.Clear();
+            Console.WriteLine("Digite o nome da pessoa que deseja buscar:");
+            string[] nomeESobrenome = Console.ReadLine().Split(' ');
+            string nome = nomeESobrenome[0];
+
+            var pessoasEncontradas = Dados.BuscarPessoas(nome);
+
+            if (pessoasEncontradas.Count() == 0)
+            {
+                Console.WriteLine("Nenhum usuario Encontrado");
+            } else
+            {
+                Console.WriteLine("\nUsuarios encontrados: \n");
+
+                foreach (var pessoa in pessoasEncontradas)
+                {
+                    Console.WriteLine(pessoa.Id + " - " + pessoa.nome + " " + pessoa.sobreNome);
+                }
+                Console.WriteLine("\n Digite o número da pessoa que deseja ter mais detalhes: ");
+                int escolha = int.Parse(Console.ReadLine());
+
+                foreach( var pessoa in pessoasEncontradas)
+                {
+                    if (pessoa.Id == escolha)
+                    {
+                        Console.WriteLine(Dados.BuscarPessoaPorId(escolha));
+                    }
+                }
+            }
+
+            VoltarProMenu();
+        }
+
+        public static void VoltarProMenu()
+        {
+            Console.WriteLine("Aperte qualquer botao para voltar");
+            Console.ReadLine();
+            Menu();
         }
     }
 }

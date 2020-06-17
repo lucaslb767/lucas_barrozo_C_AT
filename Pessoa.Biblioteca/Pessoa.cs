@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace Pessoa.Biblioteca
+namespace P.Biblioteca
 {
     public class Pessoa
     {
