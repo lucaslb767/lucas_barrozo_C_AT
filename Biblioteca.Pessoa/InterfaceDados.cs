@@ -16,7 +16,7 @@ namespace Biblioteca.Pessoa
 
         IEnumerable<Pessoa> BuscarPessoas(DateTime data);
 
-        void ApagaRecebeECria(List<Pessoa> listaPessoas);
+        void DeletaECria(List<Pessoa> listaPessoas);
 
         void Salvar(Pessoa pessoa);
 
@@ -26,6 +26,6 @@ namespace Biblioteca.Pessoa
 
         string RecebeArquivo();
 
-        void CriaPessoa(Pessoa pessoa);
+        void CriarPessoa(Pessoa pessoa);
     }
 }
