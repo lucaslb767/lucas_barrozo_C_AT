@@ -37,7 +37,7 @@ namespace lucas_barrozo_C_AT
                     EditarPessoa();
                     break;
                 case 4:
-                    //Deletar();
+                    Deletar();
                     break;
                 case 5:
                     Console.WriteLine("Saindo do programa");
@@ -67,7 +67,7 @@ namespace lucas_barrozo_C_AT
         private static void BuscaPessoa()
         {
             Console.Clear();
-            Console.WriteLine("Digite o nome da pessoa que deseja buscar:");
+            Console.WriteLine("Digite o nome da pessoa que deseja buscar (caso queira ver a lista completa, apenas aperte enter):");
             string[] nomeESobrenome = Console.ReadLine().Split(' ');
             string nome = nomeESobrenome[0];
 
@@ -138,7 +138,7 @@ namespace lucas_barrozo_C_AT
         private static void EditarPessoa()
         {
             Console.Clear();
-            Console.WriteLine("Digite o nome da pessoa a ser editada:");
+            Console.WriteLine("Digite o nome da pessoa a ser editada (caso queira ver a lista completa, apenas aperte enter):");
             string[] nomeESobrenome = Console.ReadLine().Split(' ');
             string nome = nomeESobrenome[0];
 
@@ -204,6 +204,41 @@ namespace lucas_barrozo_C_AT
 
             }
             return dataTransforma;
+        }
+
+        private static void Deletar()
+        {
+            Console.Clear();
+            Console.WriteLine("Digite o nome de quem deseja deletar (caso queira ver a lista completa, apenas aperte enter):");
+            string[] nomeESobrenome = Console.ReadLine().Split(' ');
+            string nome = nomeESobrenome[0];
+
+            var pessoasEncontradas = Dados.BuscarPessoas(nome);
+
+            if (pessoasEncontradas.Count()==0)
+            {
+                Console.WriteLine("Nenhum usuario encontrado com esses parametros");
+            } else
+            {
+                Console.WriteLine("\nLista de pessoas encontradas:");
+                foreach(var pessoa in pessoasEncontradas)
+                {
+                    Console.WriteLine($"{pessoa.Id} - {pessoa.nome} {pessoa.sobreNome}");
+                }
+
+                Console.WriteLine("Digite o ID de quem deseja deletar: ");
+                int escolha = int.Parse(Console.ReadLine());
+
+                foreach (var pessoa in pessoasEncontradas)
+                {
+                    if(pessoa.Id == escolha)
+                    {
+                        Dados.Deletar(escolha);
+                        Console.WriteLine("Pessoa apagada com sucesso!");
+                    }
+                }
+            }
+            VoltarProMenu();
         }
 
         public static void VoltarProMenu()
