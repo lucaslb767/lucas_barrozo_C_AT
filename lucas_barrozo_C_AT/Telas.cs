@@ -34,7 +34,7 @@ namespace lucas_barrozo_C_AT
                     CadastrarPessoa();
                     break;
                 case 3:
-                    //EditarPessoa();
+                    EditarPessoa();
                     break;
                 case 4:
                     //Deletar();
@@ -131,6 +131,53 @@ namespace lucas_barrozo_C_AT
             } else
             {
                 CadastrarPessoa();
+            }
+            VoltarProMenu();
+        }
+
+        private static void EditarPessoa()
+        {
+            Console.Clear();
+            Console.WriteLine("Digite o nome da pessoa a ser editada:");
+            string[] nomeESobrenome = Console.ReadLine().Split(' ');
+            string nome = nomeESobrenome[0];
+
+            var pessoasEncontradas = Dados.BuscarPessoas(nome);
+
+            if (pessoasEncontradas.Count() == 0)
+            {
+                Console.WriteLine("Ninguém foi encontrado");
+
+            } else
+            {
+                Console.WriteLine("\n Resultado da busca:");
+
+                foreach (var pessoa in pessoasEncontradas)
+                {
+                    Console.WriteLine($"{pessoa.Id} - {pessoa.nome} {pessoa.sobreNome}");
+                }
+
+                Console.WriteLine("\nDigite o número da pessoa a ser editada: ");
+                int escolha = int.Parse(Console.ReadLine());
+
+                foreach (var pessoa in pessoasEncontradas)
+                {
+                    if(pessoa.Id == escolha)
+                    {
+                        Pessoa p = Dados.BuscarPessoaPorId(escolha);
+                        Console.WriteLine("Qual é o nome novo: ");
+                        String nomeNovo = Console.ReadLine();
+                        Console.WriteLine("E o sobrenome?");
+                        String sobrenomeNovo = Console.ReadLine();
+                        DateTime aniversario = RecebeETransformaData();
+
+                        Pessoa p2 = new Pessoa(p.Id, nomeNovo, sobrenomeNovo, aniversario);
+
+                        Dados.Editar(p2);
+
+                        Console.WriteLine("Pessoa editada com sucesso!");
+                    }
+                }
             }
             VoltarProMenu();
         }
