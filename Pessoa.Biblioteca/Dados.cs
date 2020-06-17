@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 
 
-namespace Biblioteca.Pessoa
+namespace Pessoa.Biblioteca
 {
     public class Dados : InterfaceDados
     {

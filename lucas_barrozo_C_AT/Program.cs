@@ -6,7 +6,7 @@ namespace lucas_barrozo_C_AT
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Telas.Menu();
         }
     }
 }
