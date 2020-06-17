@@ -96,6 +96,8 @@ namespace P.Biblioteca
             string arquivo = RecebeArquivo();
 
             string format = $"{pessoa.Id},{pessoa.nome},{pessoa.sobreNome},{pessoa.birth};";
+
+            File.AppendAllText(arquivo, format);
         }
 
         public void Editar(Pessoa p)
